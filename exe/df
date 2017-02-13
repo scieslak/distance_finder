@@ -1,0 +1,5 @@
+#!/user/bin/env ruby
+
+require 'distance_finder'
+
+puts "Hello World!"
