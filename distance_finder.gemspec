@@ -6,12 +6,12 @@ require 'distance_finder/version'
 Gem::Specification.new do |spec|
   spec.name          = "distance_finder"
   spec.version       = DistanceFinder::VERSION
-  spec.authors       = ["scieslak"]
+  spec.authors       = ["Slawomir Cieslak"]
   spec.email         = ["scieslak@scieslak.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{DistanceFinder gets distance between two provided locations.}
+  spec.description   = %q{DistanceFinder gets distance between two provided locations useing google maps API}
+  spec.homepage      = "https://scieslak.com"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -30,7 +30,12 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  spec.add_dependency "thor", "0.19.1"
+
   spec.add_development_dependency "bundler", "~> 1.13"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "minitest", "~> 5.0"
+  spec.add_development_dependency "minitest-reporters", "1.1.14"
+  spec.add_development_dependency "guard", "2.14"
+  spec.add_development_dependency "guard-minitest", "2.4.6"
 end
