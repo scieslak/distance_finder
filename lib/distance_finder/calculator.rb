@@ -50,7 +50,7 @@ module DistanceFinder
       end
     end
 
-    # Checks for internet connection and gets response from Google API 
+    # Checks for internet connection and gets response from Google API
     def get_response
       begin
         TCPSocket.new 'google.com', 80
