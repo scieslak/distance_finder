@@ -2,4 +2,5 @@
 
 require 'distance_finder'
 
-puts "Hello World!"
+DistanceFinder::Interface.welcome
+DistanceFinder::Interface.calculate

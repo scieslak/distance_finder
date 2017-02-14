@@ -9,9 +9,15 @@ module DistanceFinder
       @google_object = parse_response
     end
 
+
+    # Returns response
+    def status
+      @google_object["status"]
+    end
+
     # Return distance
     def distance
-      @google_object["routes"][0]["legs"][0]["distance"]["text"]
+      @google_object["routes"][0]["legs"][0]["distance"]["value"] / 1000 * 0.621371
     end
 
     # Return duration
@@ -35,11 +41,23 @@ module DistanceFinder
     end
 
     def parse_response
-      JSON.parse(get_response)
+      if get_response.kind_of? Net::HTTPSuccess
+        JSON.parse(get_response.body)
+      elsif !get_response
+        JSON.parse('{"status" : "No internet connection!"}')
+      else
+        JSON.parse('{"status" : "Google API unaviable!"}')
+      end
     end
 
+    # Checks for internet connection and gets response from Google API 
     def get_response
-      Net::HTTP.get(URI(build_url))
+      begin
+        TCPSocket.new 'google.com', 80
+        Net::HTTP.get_response(URI(build_url))
+      rescue SocketError
+        return false
+      end
     end
 
     def build_url
