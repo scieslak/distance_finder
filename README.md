@@ -1,6 +1,6 @@
 # DistanceFinder
 
-Welcome to DistanceFinder. Get distance and travel time between almost any two places on the globe.DistanceFinder uses powerful Google API to deliver reliable results fast and without unnecessary baggage."
+Welcome to DistanceFinder. Get distance and travel time between almost any two places on the globe.DistanceFinder uses powerful Google API to deliver reliable results fast and without unnecessary baggage.
 
 ## Installation
 
