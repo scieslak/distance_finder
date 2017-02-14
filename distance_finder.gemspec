@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["scieslak@scieslak.com"]
 
   spec.summary       = %q{DistanceFinder gets distance between two provided locations.}
-  spec.description   = %q{DistanceFinder gets distance between two provided locations useing google maps API}
+  spec.description   = %q{DistanceFinder gets distance between two provided locations using google maps API}
   spec.homepage      = "https://scieslak.com"
   spec.license       = "MIT"
 
@@ -29,8 +29,6 @@ Gem::Specification.new do |spec|
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
-
-  spec.add_dependency "thor", "0.19.1"
 
   spec.add_development_dependency "bundler", "~> 1.13"
   spec.add_development_dependency "rake", "~> 10.0"
