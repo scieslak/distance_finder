@@ -28,17 +28,17 @@ After succesfull instalation execute
 
 Possible input formats:
 
-  [TOWN]
-  [STREET] [TOWN]
-  [HOUSE NUMBER] [STREET] [TOWN,
-  [HOUSE NUMBER] [STREET] [TOWN] [COUNTRY]
-  [HOUSE NUMBER] [STREET] [TOWN] [COUNTRY] [POST CODE]
-  [STREET] [TOWN] [COUNTRY] [POST CODE]
-  [TOWN] [COUNTRY] [POST CODE]
-  [COUNTRY] [POST CODE]
-  [POST CODE]
-    
-  `quit` for exit
+    [TOWN]
+    [STREET] [TOWN]
+    [HOUSE NUMBER] [STREET] [TOWN,
+    [HOUSE NUMBER] [STREET] [TOWN] [COUNTRY]
+    [HOUSE NUMBER] [STREET] [TOWN] [COUNTRY] [POST CODE]
+    [STREET] [TOWN] [COUNTRY] [POST CODE]
+    [TOWN] [COUNTRY] [POST CODE]
+    [COUNTRY] [POST CODE]
+    [POST CODE]
+
+    `quit` for exit
   
   
 ### As dependency ###
