@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/scieslak/distance_finder.svg?branch=master)](https://travis-ci.org/scieslak/distance_finder) [![Code Climate](https://lima.codeclimate.com/github/scieslak/distance_finder/badges/gpa.svg)](https://lima.codeclimate.com/github/scieslak/distance_finder)
+
 # DistanceFinder
 
 Welcome to DistanceFinder. Get distance and travel time between almost any two places on the globe.DistanceFinder uses powerful Google API to deliver reliable results fast and without unnecessary baggage.
