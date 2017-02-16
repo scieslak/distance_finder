@@ -40,6 +40,7 @@ module DistanceFinder
       puts JSON.pretty_generate(@google_object)
     end
 
+    
     def parse_response
       if get_response.kind_of? Net::HTTPSuccess
         JSON.parse(get_response.body)

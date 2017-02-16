@@ -42,7 +42,7 @@ module DistanceFinder
         if route.status == "OK"
           puts format_result("⊗ Origin:", route.start_address)
           puts format_result("⊗ Destination:", route.end_address)
-          puts format_result("⇄ Distance:", route.distance.round(1).to_s + "miles")
+          puts format_result("⇄ Distance:", route.distance.round(1).to_s + " miles")
           puts format_result("🕑 Travel time:", route.duration)
         else
           puts format_result("Sorry, unable to find the route.")
