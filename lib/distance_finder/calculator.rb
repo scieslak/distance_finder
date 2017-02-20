@@ -4,8 +4,8 @@ module DistanceFinder
     attr_reader :distance, :duration, :start_address, :end_address, :display_full_response
 
     def initialize(origin, destination)
-      @origin = origin.strip().tr(" ", "+")
-      @destination = destination.strip().tr(" ", "+")
+      @origin = strip_input(origin)
+      @destination = strip_input(destination)
       @google_object = parse_response
     end
 
@@ -40,7 +40,7 @@ module DistanceFinder
       puts JSON.pretty_generate(@google_object)
     end
 
-    
+
     def parse_response
       if get_response.kind_of? Net::HTTPSuccess
         JSON.parse(get_response.body)
@@ -63,6 +63,10 @@ module DistanceFinder
 
     def build_url
       "https://maps.googleapis.com/maps/api/directions/json?origin=#{@origin}&destination=#{@destination}"
+    end
+
+    def strip_input(string)
+      ActiveSupport::Inflector.transliterate(string).strip()
     end
 
   end

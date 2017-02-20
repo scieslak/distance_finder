@@ -37,4 +37,9 @@ class DistanceFinderTest < Minitest::Test
     assert @@route.get_response
   end
 
+  def test_strip_input
+    assert_equal @@route.strip_input("ĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİıĲĳĴĵĶķĸĹĺĻļĽľĿŀŁłŃńŅņŇň"),
+    "AaAaAaCcCcCcCcDdDdEeEeEeEeEeGgGgGgGgHhHhIiIiIiIiIiIJijJjKkkLlLlLlLlLlNnNnNn"
+  end
+
 end
