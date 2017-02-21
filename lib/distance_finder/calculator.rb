@@ -2,10 +2,13 @@ module DistanceFinder
   class Calculator
 
     attr_reader :distance, :duration, :start_address, :end_address, :display_full_response
+    attr_accessor :status
 
-    def initialize(origin, destination)
-      @origin = strip_input(origin)
-      @destination = strip_input(destination)
+    def initialize(origin, destination, mode = "driving", units = "imperial")
+      @origin = origin.strip()
+      @destination = destination.strip()
+      @mode = "mode=" + mode
+      @units = "units=" + units
       @google_object = parse_response
     end
 
@@ -17,21 +20,25 @@ module DistanceFinder
 
     # Return distance
     def distance
-      @google_object["routes"][0]["legs"][0]["distance"]["value"] / 1000 * 0.621371
+      return "Error!" unless status == "OK"
+      @google_object["routes"][0]["legs"][0]["distance"]["text"]
     end
 
     # Return duration
     def duration
+      return "Error!" unless status == "OK"
       @google_object["routes"][0]["legs"][0]["duration"]["text"]
     end
 
     # Return origin name
     def start_address
+      return @origin unless status == "OK"
       @google_object["routes"][0]["legs"][0]["start_address"]
     end
 
     # Returns destination name
     def end_address
+      return @destination unless status == "OK"
       @google_object["routes"][0]["legs"][0]["end_address"]
     end
 
@@ -62,11 +69,13 @@ module DistanceFinder
     end
 
     def build_url
-      "https://maps.googleapis.com/maps/api/directions/json?origin=#{@origin}&destination=#{@destination}"
+      "https://maps.googleapis.com/maps/api/directions/json?origin=#{convert_input(@origin)}&destination=#{convert_input(@destination)}&#{@units}&#{@mode}"
     end
 
-    def strip_input(string)
-      ActiveSupport::Inflector.transliterate(string).strip()
+    # Converts non english characters into english equivalents
+    # Replaces spaces with "+"
+    def convert_input(string)
+      ActiveSupport::Inflector.transliterate(string).strip().tr(" ", "+")
     end
 
   end
