@@ -20,13 +20,11 @@ module DistanceFinder
 
     # Return distance
     def distance
-      return "Error!" unless status == "OK"
       @google_object["routes"][0]["legs"][0]["distance"]["text"]
     end
 
     # Return duration
     def duration
-      return "Error!" unless status == "OK"
       @google_object["routes"][0]["legs"][0]["duration"]["text"]
     end
 
