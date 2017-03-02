@@ -68,7 +68,8 @@ module DistanceFinder
 
     # Builds URI with parameters
     def build_uri
-      uri = URI("https://maps.googleapis.com/maps/api/directions/json")
+      url = "https://maps.googleapis.com/maps/api/directions/json"
+      uri = URI(url)
       uri.query = ""
       @params.each {|k, v| uri.query << "#{k}=#{v}&" }
       uri.query = uri.query.chop
