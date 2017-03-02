@@ -33,8 +33,8 @@ class DistanceFinderTest < Minitest::Test
     refute @@route.parse_response["status"].nil?
   end
 
-  def test_can_get_response
-    assert @@route.get_response
+  def test_can_fetch_response
+    assert @@route.fetch_response
   end
 
   def test_convert_input

@@ -47,9 +47,9 @@ module DistanceFinder
 
 
     def parse_response
-      if get_response.kind_of? Net::HTTPSuccess
-        JSON.parse(get_response.body)
-      elsif !get_response
+      if fetch_response.kind_of? Net::HTTPSuccess
+        JSON.parse(fetch_response.body)
+      elsif !fetch_response
         JSON.parse('{"status" : "No internet connection!"}')
       else
         JSON.parse('{"status" : "Google API unaviable!"}')
@@ -57,13 +57,19 @@ module DistanceFinder
     end
 
     # Checks for internet connection and gets response from Google API
-    def get_response
+    def fetch_response
+      connection? ? Net::HTTP.get_response(build_uri) : false
+    end
+
+    # Checks the Internet connection
+    def connection?
       begin
         TCPSocket.new 'google.com', 80
-        Net::HTTP.get_response(build_uri)
+        return true
       rescue SocketError
         return false
       end
+
     end
 
     # Builds URI with parameters
