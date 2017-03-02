@@ -4,10 +4,12 @@ module DistanceFinder
     attr_reader :distance, :duration, :start_address, :end_address, :display_full_response, :status
 
     def initialize(origin, destination, mode = "driving", units = "imperial")
-      @origin = origin.strip()
-      @destination = destination.strip()
-      @mode = "mode=" + mode
-      @units = "units=" + units
+      @params = {
+        "origin"      => origin,
+        "destination" => destination,
+        "units"       => units,
+        "mode"        => mode
+      }
       @google_object = parse_response
       @error_msg = "Error!"
     end
@@ -30,12 +32,12 @@ module DistanceFinder
 
     # Return origin name
     def start_address
-      @google_object["routes"][0]["legs"][0]["start_address"] ||= @origin
+      @google_object["routes"][0]["legs"][0]["start_address"] ||= @params["origin"]
     end
 
     # Returns destination name
     def end_address
-      @google_object["routes"][0]["legs"][0]["end_address"] ||= @destination
+      @google_object["routes"][0]["legs"][0]["end_address"] ||= @params["destination"]
     end
 
     # Generate pretty JSON for command line output
@@ -58,17 +60,20 @@ module DistanceFinder
     def get_response
       begin
         TCPSocket.new 'google.com', 80
-        Net::HTTP.get_response(URI(build_url))
+        Net::HTTP.get_response(build_uri)
       rescue SocketError
         return false
       end
     end
 
-    def build_url
-      "https://maps.googleapis.com/maps/api/directions/json?origin=#{convert_input(@origin)}&destination=#{convert_input(@destination)}&#{@units}&#{@mode}"
+    # Builds URI with parameters
+    def build_uri
+      uri = URI("https://maps.googleapis.com/maps/api/directions/json")
+      uri.query = ""
+      @params.each {|k, v| uri.query << "#{k}=#{v}&" }
+      uri.query = uri.query.chop
+      return uri
     end
-
-
 
     # Converts non english characters into english equivalents
     # Replaces spaces with "+"

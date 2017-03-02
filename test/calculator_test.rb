@@ -24,9 +24,9 @@ class DistanceFinderTest < Minitest::Test
   end
 
 
-  def test_can_build_url
-    url = "https://maps.googleapis.com/maps/api/directions/json?origin=#{@@route.convert_input(@@origin)}&destination=#{@@route.convert_input(@@destination)}&units=imperial&mode=driving"
-    assert_equal @@route.build_url, url
+  def test_can_build_uri
+    uri = "https://maps.googleapis.com/maps/api/directions/json?origin=#{@@route.convert_input(@@origin)}&destination=#{@@route.convert_input(@@destination)}&units=imperial&mode=driving"
+    assert_equal @@route.build_uri, URI(uri)
   end
 
   def test_can_parse_response
