@@ -1,8 +1,7 @@
 module DistanceFinder
   class Calculator
 
-    attr_reader :distance, :duration, :start_address, :end_address, :display_full_response
-    attr_accessor :status
+    attr_reader :distance, :duration, :start_address, :end_address, :display_full_response, :status
 
     def initialize(origin, destination, mode = "driving", units = "imperial")
       @origin = origin.strip()
@@ -10,6 +9,7 @@ module DistanceFinder
       @mode = "mode=" + mode
       @units = "units=" + units
       @google_object = parse_response
+      @error_msg = "Error!"
     end
 
 
@@ -20,24 +20,22 @@ module DistanceFinder
 
     # Return distance
     def distance
-      @google_object["routes"][0]["legs"][0]["distance"]["text"]
+      @google_object["routes"][0]["legs"][0]["distance"]["text"] ||= @error_msg
     end
 
     # Return duration
     def duration
-      @google_object["routes"][0]["legs"][0]["duration"]["text"]
+      @google_object["routes"][0]["legs"][0]["duration"]["text"] ||= @error_msg
     end
 
     # Return origin name
     def start_address
-      return @origin unless status == "OK"
-      @google_object["routes"][0]["legs"][0]["start_address"]
+      @google_object["routes"][0]["legs"][0]["start_address"] ||= @origin
     end
 
     # Returns destination name
     def end_address
-      return @destination unless status == "OK"
-      @google_object["routes"][0]["legs"][0]["end_address"]
+      @google_object["routes"][0]["legs"][0]["end_address"] ||= @destination
     end
 
     # Generate pretty JSON for command line output
@@ -69,6 +67,8 @@ module DistanceFinder
     def build_url
       "https://maps.googleapis.com/maps/api/directions/json?origin=#{convert_input(@origin)}&destination=#{convert_input(@destination)}&#{@units}&#{@mode}"
     end
+
+
 
     # Converts non english characters into english equivalents
     # Replaces spaces with "+"

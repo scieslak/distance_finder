@@ -8,31 +8,19 @@ class DistanceFinderTest < Minitest::Test
 
 
   def test_can_output_distance
-    assert @@route.distance
+    refute @@route.distance.nil?
   end
 
   def test_can_output_duration
-    assert @@route.duration
+    refute @@route.duration.nil?
   end
 
   def test_can_output_end_address
-    assert @@route.end_address
-  end
-
-  def test_can_output_end_address_if_no_internet_or_api_connection
-    @@route.stub :status, "Google API unaviable!" do
-      assert_equal @@route.end_address, @@destination
-    end
+    refute @@route.end_address.nil?
   end
 
   def test_can_output_start_address
-    assert @@route.start_address
-  end
-
-  def test_can_output_start_address_if_no_internet_or_api_connection
-    @@route.stub :status, "Google API unaviable!" do
-      assert_equal @@route.start_address, @@origin
-    end
+    refute @@route.start_address.nil?
   end
 
 
