@@ -59,7 +59,7 @@ module DistanceFinder
       end
     end
 
-    # Checks for internet connection and gets response from Google API
+    # Gets response from Google API or return false if no Internet connection
     def fetch_response
       connection? ? Net::HTTP.get_response(build_uri) : false
     end
