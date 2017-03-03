@@ -24,17 +24,17 @@ module DistanceFinder
       @google_object["status"]
     end
 
-    # Return distance
+    # Returns distance
     def distance
       @google_object["routes"][0]["legs"][0]["distance"]["text"] ||= @error_msg
     end
 
-    # Return duration
+    # Returns duration
     def duration
       @google_object["routes"][0]["legs"][0]["duration"]["text"] ||= @error_msg
     end
 
-    # Return origin name
+    # Returns origin name
     def start_address
       @google_object["routes"][0]["legs"][0]["start_address"] ||= @params["origin"]
     end
@@ -44,7 +44,7 @@ module DistanceFinder
       @google_object["routes"][0]["legs"][0]["end_address"] ||= @params["destination"]
     end
 
-    # Generate pretty JSON for command line output
+    # Generates pretty JSON for command line output
     def full_response
       puts JSON.pretty_generate(@google_object)
     end
@@ -59,7 +59,7 @@ module DistanceFinder
       end
     end
 
-    # Gets response from Google API or return false if no Internet connection
+    # Gets response from Google API or returns false if no Internet connection
     def fetch_response
       connection? ? Net::HTTP.get_response(build_uri) : false
     end
