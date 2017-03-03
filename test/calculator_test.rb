@@ -6,7 +6,6 @@ class DistanceFinderTest < Minitest::Test
   @@destination = "Basingstoke"
   @@route = DistanceFinder::Calculator.new(@@origin, @@destination)
 
-
   def test_can_output_distance
     refute @@route.distance.nil?
   end
@@ -22,7 +21,6 @@ class DistanceFinderTest < Minitest::Test
   def test_can_output_start_address
     refute @@route.start_address.nil?
   end
-
 
   def test_can_build_uri
     uri = "https://maps.googleapis.com/maps/api/directions/json?origin=#{@@route.convert_input(@@origin)}&destination=#{@@route.convert_input(@@destination)}&units=imperial&mode=driving"

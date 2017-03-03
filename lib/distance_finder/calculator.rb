@@ -1,7 +1,12 @@
 module DistanceFinder
   class Calculator
 
-    attr_reader :distance, :duration, :start_address, :end_address, :display_full_response, :status
+    attr_reader :status,
+                :start_address,
+                :end_address,
+                :distance,
+                :duration,
+                :display_full_response
 
     def initialize(origin, destination, mode = "driving", units = "imperial")
       @params = {
@@ -13,7 +18,6 @@ module DistanceFinder
       @google_object = parse_response
       @error_msg = "Error!"
     end
-
 
     # Returns response
     def status
@@ -45,7 +49,6 @@ module DistanceFinder
       puts JSON.pretty_generate(@google_object)
     end
 
-
     def parse_response
       if fetch_response.kind_of? Net::HTTPSuccess
         JSON.parse(fetch_response.body)
@@ -69,7 +72,6 @@ module DistanceFinder
       rescue SocketError
         return false
       end
-
     end
 
     # Builds URI with parameters
